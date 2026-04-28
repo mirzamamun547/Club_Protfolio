@@ -4,58 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KBC Official | KUET Business & Entrepreneurship Club</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
-        <span>KBC</span>
-        <p>KUET Business & Entrepreneurship Club</p>
+        <img src="logo.png" alt="KBC Logo">
+        <div class="brand-text">
+          <span>KBC</span>
+          <p>KUET Business & Entrepreneurship Club</p>
+        </div>
       </div>
       <nav class="nav-links">
+        <a href="#home">Home</a>
         <a href="#about">About</a>
-        <a href="#programs">Programs</a>
+        <a href="#programs">Events</a>
         <a href="#vision">Vision</a>
-        <a href="admin-login.html">Admin Login</a>
-        <a href="admin-signup.html">Signup</a>
+        <a href="admin-login.html" class="nav-cta">Admin</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero section-hero">
+    <section id="home" class="hero section-hero">
       <div class="container hero-grid">
-        <div>
+        <div class="hero-copy-block reveal">
           <p class="eyebrow">Official KUET Career Club</p>
-          <h1>Empowering KUETians for success beyond campus</h1>
-          <p class="hero-copy">KUET Business and Entrepreneurship Club (KBC) supports students with career-focused seminars, skill-building workshops, higher study guidance, and leadership programs led by top speakers and alumni.</p>
-          <div class="hero-actions">
-        
-            <a class="btn-primary" href="#programs">Explore Programs</a>
+          <h1>KBC</h1>
+          <p class="hero-copy">Igniting enthusiasm, expertise, and excellence at KUET. Empowering students to master skills, innovate, and shine globally with KBC.</p>
+          <div class="hero-actions reveal">
+            <a class="btn-secondary" href="#about">Discover More</a>
+            <a class="btn-primary" href="#programs">View Events</a>
           </div>
         </div>
-        <div class="hero-card">
-          <div class="hero-card-inner">
-            <h2>What we offer</h2>
-            <ul>
-              <li>Career seminars with national speakers</li>
-              <li>Skill development workshops</li>
-              <li>Idea sharing & leadership sessions</li>
-              <li>Higher study guidance and alumni mentorship</li>
-            </ul>
-          </div>
+       
+      </div>
+    </section>
+
+    <section class="section section-offer">
+      <div class="container">
+        <div class="offer-panel reveal">
+          <h2>What we offer</h2>
+          <ul class="offer-list">
+            <li>Career seminars with national speakers</li>
+            <li>Skill development workshops</li>
+            <li>Idea sharing & leadership sessions</li>
+            <li>Higher study guidance and alumni mentorship</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <section id="about" class="section section-about">
-      <div class="container section-heading">
+      <div class="container section-heading reveal">
         <p class="eyebrow">About KBC</p>
         <h2>Helping KUETians choose the right career path</h2>
         <p>KBC is a student-run career club at KUET that prepares members for competitive opportunities, leadership roles, and successful futures through events, training, and mentorship.</p>
       </div>
-      <div class="container about-grid">
+      <div class="container about-grid reveal">
         <article class="feature-card">
           <h3>Career Awareness</h3>
           <p>Guiding students through industry trends, job opportunities, entrepreneurship, and higher education choices.</p>
@@ -72,11 +79,11 @@
     </section>
 
     <section id="programs" class="section section-programs">
-      <div class="container section-heading">
-        <p class="eyebrow">Our Programs</p>
+      <div class="container section-heading reveal">
+        <p class="eyebrow">Our Events</p>
         <h2>Events designed to inspire and prepare</h2>
       </div>
-      <div class="container programs-grid">
+      <div class="container programs-grid reveal">
         <article class="program-card">
           <h3>Career Seminars</h3>
           <p>Expert-led sessions on career planning, interview preparation, and competitive industries.</p>
@@ -93,7 +100,7 @@
     </section>
 
     <section id="vision" class="section section-vision">
-      <div class="container vision-inner">
+      <div class="container vision-inner reveal">
         <div>
           <p class="eyebrow">Our Vision</p>
           <h2>Confident KUETians thriving across every sector</h2>
@@ -118,12 +125,12 @@
     </section>
 
     <section id="contact" class="section section-contact">
-      <div class="container section-heading">
+      <div class="container section-heading reveal">
         <p class="eyebrow">Stay Connected</p>
         <h2>Follow KBC for updates</h2>
         <p>Keep in touch with our events, workshops, and program announcements on social media.</p>
       </div>
-      <div class="container contact-grid">
+      <div class="container contact-grid reveal">
         <div class="contact-card">
           <h3>Email</h3>
           <p>info@kbcofficial.com</p>
@@ -145,5 +152,6 @@
       <p>© 2026 KUET Business & Entrepreneurship Club. All rights reserved.</p>
     </div>
   </footer>
+  <script src="script.js"></script>
 </body>
 </html>
