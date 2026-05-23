@@ -109,10 +109,10 @@
         <nav class="nav-links">
           <a href="#home">Home</a>
           <a href="#about">About</a>
-          <a href="member.html">Members</a>
-          <a href="events.html">Events</a>
+          <a href="member.aspx">Members</a>
+          <a href="events.aspx">Events</a>
           <a href="#vision">Vision</a>
-          <a href="admin-login.html" class="nav-cta">Admin</a>
+          <a href="admin-login.aspx" class="nav-cta">Admin</a>
         </nav>
       </div>
     </header>
@@ -126,7 +126,7 @@
             <p class="hero-copy">Igniting enthusiasm, expertise, and excellence at KUET. Empowering students to master skills, innovate, and shine globally with KBC.</p>
             <div class="hero-actions reveal">
               <a class="btn-secondary" href="#about">Discover More</a>
-              <a class="btn-primary" href="events.html">View Events</a>
+              <a class="btn-primary" href="events.aspx">View Events</a>
             </div>
           </div>
          
@@ -196,7 +196,7 @@
             <p class="eyebrow">Our Vision</p>
             <h2>Confident KUETians thriving across every sector</h2>
             <p>We aim to make every student career-conscious and prepared to compete for top jobs, higher study programs, and entrepreneurial success.</p>
-            <a class="btn-primary" href="admin-login.html">Join the Team    </a>
+            <a class="btn-primary" href="admin-login.aspx">Join the Team    </a>
           </div>
           <div class="vision-stats">
             <div class="stat-card">
