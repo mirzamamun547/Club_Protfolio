@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin-login.aspx.cs" Inherits="KBC.admin_login" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin-login.aspx.cs" Inherits="KBC.admin_login" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -38,47 +38,21 @@
           </div>
 
           <div class="auth-form">
+            <asp:Label ID="lblMessage" runat="server" CssClass="message-label" ForeColor="#5CE1E6" Font-Bold="true" Style="display:block; margin-bottom:10px;" />
             <label>
               <span>Email address</span>
-              <input type="email" name="email" id="txtEmail" placeholder="admin@kbcofficial.com" required>
+              <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="admin@kbcofficial.com" required="required" />
             </label>
             <label>
               <span>Password</span>
-              <input type="password" name="password" id="txtPassword" placeholder="••••••••" required>
+              <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="••••••••" required="required" />
             </label>
-            <button type="submit" class="btn-primary" id="btnLogin">Login</button>
+            <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn-primary" OnClick="btnLogin_Click" />
             <p class="auth-note">Need support? <a href="mailto:info@kbcofficial.com">info@kbcofficial.com</a></p>
           </div>
         </section>
       </div>
     </main>
-
-    <script>
-      document.querySelector('.auth-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const email = document.getElementById('txtEmail').value;
-        const password = document.getElementById('txtPassword').value;
-        
-        // Basic validation
-        if (!email || !password) {
-          alert('Please fill in all fields');
-          return;
-        }
-        
-        // Simple demo credentials
-        const adminEmail = 'admin@kbcofficial.com';
-        const adminPassword = 'KBC@2024';
-        
-        if (email === adminEmail && password === adminPassword) {
-          alert('Login successful!');
-          // Redirect to admin dashboard
-          window.location.href = 'admin-dashboard.aspx';
-        } else {
-          alert('Invalid email or password');
-        }
-      });
-    </script>
   </form>
 </body>
 </html>

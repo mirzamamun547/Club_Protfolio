@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="events.aspx.cs" Inherits="KBC.events_page" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="events.aspx.cs" Inherits="KBC.events_page" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -47,62 +47,25 @@
         </div>
 
         <div class="container events-grid reveal">
-          
-          <!-- Event Card 1 -->
-          <article class="event-card">
-            <div class="event-image">
-              <span class="event-badge badge-past">Completed</span>
-              <!-- Placeholder gradient for image. User can replace src later -->
-              <div style="width: 100%; height: 200px; background: linear-gradient(135deg, var(--primary), var(--primary-dark));"></div>
-            </div>
-            <div class="event-content">
-              <h3 class="event-title">TEDxKUET</h3>
-              <div class="event-meta">
-                <span>📅 Past Event</span>
-                <span>📍 KUET</span>
-              </div>
-              <p class="event-desc">Join us for inspiring talks and ideas worth spreading at TEDxKUET.</p>
-              <!-- EXACT FACEBOOK EVENT LINK -->
-              <a href="https://www.facebook.com/events/2439190826531758/" target="_blank" class="btn-secondary event-btn">View Event Details</a>
-            </div>
-          </article>
-
-          <!-- Event Card 2 -->
-          <article class="event-card">
-            <div class="event-image">
-              <span class="event-badge badge-ongoing">Ongoing</span>
-              <div style="width: 100%; height: 200px; background: linear-gradient(135deg, var(--accent), #d97706);"></div>
-            </div>
-            <div class="event-content">
-              <h3 class="event-title">KBEC NEXUS Season 2</h3>
-              <div class="event-meta">
-                <span>📅 Past Event</span>
-                <span>📍 KUET</span>
-              </div>
-              <p class="event-desc">A National Business Case Competition presented by NCC Bank.</p>
-              <!-- EXACT FACEBOOK EVENT LINK -->
-              <a href="https://www.facebook.com/events/2269980206835320/" target="_blank" class="btn-secondary event-btn">View Event Details</a>
-            </div>
-          </article>
-
-          <!-- Event Card 3 -->
-          <article class="event-card">
-            <div class="event-image">
-              <span class="event-badge badge-past">Completed</span>
-              <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #475569, #1e293b);"></div>
-            </div>
-            <div class="event-content">
-              <h3 class="event-title">Mavericks Assemble 4.0</h3>
-              <div class="event-meta">
-                <span>📅 Past Event</span>
-                <span>📍 KUET Campus</span>
-              </div>
-              <p class="event-desc">The flagship event of KUET Business and Entrepreneurship Club.</p>
-              <!-- EXACT FACEBOOK EVENT LINK -->
-              <a href="https://www.facebook.com/events/1222915079885802/" target="_blank" class="btn-secondary event-btn">View Event Details</a>
-            </div>
-          </article>
-
+          <asp:Repeater ID="rptEvents" runat="server">
+            <ItemTemplate>
+              <article class="event-card">
+                <div class="event-image">
+                  <span class='<%# "event-badge badge-" + Eval("Status").ToString().ToLower() %>'><%# Eval("Status") %></span>
+                  <div style='<%# "width: 100%; height: 200px; background: " + Eval("ImageGradient") + ";" %>'></div>
+                </div>
+                <div class="event-content">
+                  <h3 class="event-title"><%# Eval("EventName") %></h3>
+                  <div class="event-meta">
+                    <span>📅 <%# Eval("EventDate", "{0:MMM d, yyyy}") %></span>
+                    <span>📍 <%# Eval("Location") %></span>
+                  </div>
+                  <p class="event-desc">Join KUET Business and Entrepreneurship Club at <%# Eval("EventName") %> for an inspiring and educational session.</p>
+                  <a href='<%# Eval("FacebookUrl") %>' target="_blank" class="btn-secondary event-btn">View Event Details</a>
+                </div>
+              </article>
+            </ItemTemplate>
+          </asp:Repeater>
         </div>
       </section>
     </main>

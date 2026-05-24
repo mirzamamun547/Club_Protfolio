@@ -163,7 +163,7 @@ img {
   box-shadow: 0 0 0 4px rgba(124, 153, 255, 0.12);
 }
 
-button.btn-primary {
+.btn-primary {
   width: 100%;
   padding: 1rem 1.2rem;
   border: none;
@@ -171,9 +171,13 @@ button.btn-primary {
   background: linear-gradient(135deg, var(--primary), #3c5dd9);
   color: #fff;
   cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
 }
 
-button.btn-primary:hover {
+.btn-primary:hover {
   transform: translateY(-1px);
 }
 

@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin-dashboard.aspx.cs" Inherits="KBC.admin_dashboard" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin-dashboard.aspx.cs" Inherits="KBC.admin_dashboard" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -24,7 +24,7 @@
           <a href="#events" class="nav-link">Manage Events</a>
           <a href="#members" class="nav-link">Manage Members</a>
           <a href="#programs" class="nav-link">Manage Programs</a>
-          <a href="index.aspx" class="nav-link logout">Logout</a>
+          <asp:LinkButton ID="lnkLogout" runat="server" CssClass="nav-link logout" OnClick="lnkLogout_Click">Logout</asp:LinkButton>
         </nav>
       </aside>
 
@@ -32,26 +32,26 @@
         <header class="dashboard-header">
           <div>
             <p class="eyebrow">Admin Dashboard</p>
-            <h2>Welcome, Admin</h2>
+            <h2 id="lblWelcome" runat="server">Welcome, Admin</h2>
             <p>Manage events, members, and programs for the KUET Business & Entrepreneurship Club.</p>
           </div>
           <div class="dashboard-topcard">
-            <span>admin@kbcofficial.com</span>
+            <asp:Label ID="lblAdminEmail" runat="server" Text="admin@kbcofficial.com" />
           </div>
         </header>
 
         <section id="overview" class="dashboard-section">
           <div class="section-grid">
             <article class="metric-card">
-              <h3>24</h3>
+              <h3><asp:Label ID="lblEventCount" runat="server" Text="0" /></h3>
               <p>Events</p>
             </article>
             <article class="metric-card">
-              <h3>156</h3>
+              <h3><asp:Label ID="lblMemberCount" runat="server" Text="0" /></h3>
               <p>Members</p>
             </article>
             <article class="metric-card">
-              <h3>8</h3>
+              <h3><asp:Label ID="lblProgramCount" runat="server" Text="0" /></h3>
               <p>Programs</p>
             </article>
             <article class="metric-card">
@@ -70,43 +70,25 @@
             <a href="#" class="btn-primary">+ Add Event</a>
           </div>
           <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Event Name</th>
-                  <th>Date</th>
-                  <th>Location</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Career Seminar</td>
-                  <td>2024-06-15</td>
-                  <td>Auditorium</td>
-                  <td><span class="badge badge-completed">Completed</span></td>
-                  <td><a href="#" class="action-link delete">Delete</a></td>
-                </tr>
-                <tr>
-                  <td>Leadership Workshop</td>
-                  <td>2024-06-22</td>
-                  <td>Conference Room</td>
-                  <td><span class="badge badge-upcoming">Upcoming</span></td>
-                  <td>
-                    <a href="#" class="action-link">Edit</a>
-                    <a href="#" class="action-link delete">Delete</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Skill Development</td>
-                  <td>2024-06-28</td>
-                  <td>Lab</td>
-                  <td><span class="badge badge-upcoming">Upcoming</span></td>
-                  <td><a href="#" class="action-link">Edit</a></td>
-                </tr>
-              </tbody>
-            </table>
+            <asp:GridView ID="gvEvents" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" CssClass="admin-grid">
+              <Columns>
+                <asp:BoundField DataField="EventName" HeaderText="Event Name" />
+                <asp:BoundField DataField="EventDate" HeaderText="Date" DataFormatString="{0:yyyy-MM-dd}" />
+                <asp:BoundField DataField="Location" HeaderText="Location" />
+                <asp:TemplateField HeaderText="Status">
+                  <ItemTemplate>
+                    <span class='<%# "badge badge-" + Eval("Status").ToString().ToLower() %>'>
+                      <%# Eval("Status") %>
+                    </span>
+                  </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Action">
+                  <ItemTemplate>
+                    <span class="action-text" style="color:var(--muted); font-size:0.95rem;">System Locked</span>
+                  </ItemTemplate>
+                </asp:TemplateField>
+              </Columns>
+            </asp:GridView>
           </div>
         </section>
 
@@ -116,43 +98,22 @@
               <h3>Manage Members</h3>
               <p>Edit member roles and contact details.</p>
             </div>
-            <a href="#" class="btn-primary">+ Add Member</a>
+            <a href="lab-crud.aspx" class="btn-primary">+ Add Member (CRUD Lab)</a>
           </div>
           <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Role</th>
-                  <th>Department</th>
-                  <th>Email</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Ahmed Hassan</td>
-                  <td>President</td>
-                  <td>CSE</td>
-                  <td>ahmed@kbc.com</td>
-                  <td><a href="#" class="action-link">Edit</a></td>
-                </tr>
-                <tr>
-                  <td>Fatima Rahman</td>
-                  <td>Vice President</td>
-                  <td>EEE</td>
-                  <td>fatima@kbc.com</td>
-                  <td><a href="#" class="action-link">Edit</a></td>
-                </tr>
-                <tr>
-                  <td>Karim Khan</td>
-                  <td>Events Manager</td>
-                  <td>ME</td>
-                  <td>karim@kbc.com</td>
-                  <td><a href="#" class="action-link">Edit</a></td>
-                </tr>
-              </tbody>
-            </table>
+            <asp:GridView ID="gvMembers" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%">
+              <Columns>
+                <asp:BoundField DataField="Name" HeaderText="Name" />
+                <asp:BoundField DataField="Role" HeaderText="Role" />
+                <asp:BoundField DataField="Department" HeaderText="Department" />
+                <asp:BoundField DataField="Email" HeaderText="Email" />
+                <asp:TemplateField HeaderText="Action">
+                  <ItemTemplate>
+                    <span class="action-text" style="color:var(--muted); font-size:0.95rem;">System Locked</span>
+                  </ItemTemplate>
+                </asp:TemplateField>
+              </Columns>
+            </asp:GridView>
           </div>
         </section>
 
@@ -162,43 +123,28 @@
               <h3>Manage Programs</h3>
               <p>Track active programs and update descriptions.</p>
             </div>
-            <a href="#" class="btn-primary">+ Add Program</a>
+            <a href="lab-crud.aspx" class="btn-primary">+ Add Program (CRUD Lab)</a>
           </div>
           <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Program</th>
-                  <th>Description</th>
-                  <th>Type</th>
-                  <th>Status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Career Seminars</td>
-                  <td>Expert career preparation sessions.</td>
-                  <td>Seminar</td>
-                  <td><span class="badge badge-active">Active</span></td>
-                  <td><a href="#" class="action-link">Edit</a></td>
-                </tr>
-                <tr>
-                  <td>Skill Workshops</td>
-                  <td>Leadership and communication training.</td>
-                  <td>Workshop</td>
-                  <td><span class="badge badge-active">Active</span></td>
-                  <td><a href="#" class="action-link">Edit</a></td>
-                </tr>
-                <tr>
-                  <td>Idea Labs</td>
-                  <td>Entrepreneurship ideation sessions.</td>
-                  <td>Lab</td>
-                  <td><span class="badge badge-active">Active</span></td>
-                  <td><a href="#" class="action-link">Edit</a></td>
-                </tr>
-              </tbody>
-            </table>
+            <asp:GridView ID="gvPrograms" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%">
+              <Columns>
+                <asp:BoundField DataField="ProgramName" HeaderText="Program" />
+                <asp:BoundField DataField="Description" HeaderText="Description" />
+                <asp:BoundField DataField="ProgramType" HeaderText="Type" />
+                <asp:TemplateField HeaderText="Status">
+                  <ItemTemplate>
+                    <span class='<%# "badge badge-" + Eval("Status").ToString().ToLower() %>'>
+                      <%# Eval("Status") %>
+                    </span>
+                  </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Action">
+                  <ItemTemplate>
+                    <span class="action-text" style="color:var(--muted); font-size:0.95rem;">System Locked</span>
+                  </ItemTemplate>
+                </asp:TemplateField>
+              </Columns>
+            </asp:GridView>
           </div>
         </section>
       </main>

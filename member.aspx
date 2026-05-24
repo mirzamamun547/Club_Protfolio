@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="member.aspx.cs" Inherits="KBC.member" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="member.aspx.cs" Inherits="KBC.member" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -60,136 +60,25 @@
           </div>
 
           <div class="members-grid-full reveal">
-            <!-- Leadership Team -->
-            <article class="member-card-full" data-category="leadership">
-              <div class="member-avatar-full">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div class="member-info">
-                <h3>Ahmed Hassan</h3>
-                <p class="member-role-full">President</p>
-                <p class="member-department">Department: CSE</p>
-                <p class="member-bio-full">Visionary leader with a passion for entrepreneurship and student development. Ahmed has successfully organized 20+ seminars and mentored 100+ students in career planning.</p>
-                <div class="member-contact">
-                  <a href="mailto:ahmed@kbc.com">Email</a>
-                  <a href="#">LinkedIn</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="member-card-full" data-category="leadership">
-              <div class="member-avatar-full">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div class="member-info">
-                <h3>Fatima Rahman</h3>
-                <p class="member-role-full">Vice President</p>
-                <p class="member-department">Department: EEE</p>
-                <p class="member-bio-full">Strategic thinker dedicated to organizing impactful career seminars and workshops. Fatima brings excellent organizational skills and industry connections.</p>
-                <div class="member-contact">
-                  <a href="mailto:fatima@kbc.com">Email</a>
-                  <a href="#">LinkedIn</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Coordinators -->
-            <article class="member-card-full" data-category="coordinators">
-              <div class="member-avatar-full">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div class="member-info">
-                <h3>Karim Khan</h3>
-                <p class="member-role-full">Events Manager</p>
-                <p class="member-department">Department: ME</p>
-                <p class="member-bio-full">Creative organizer bringing professional speakers and mentors to our community. Karim has coordinated partnerships with 30+ industry experts.</p>
-                <div class="member-contact">
-                  <a href="mailto:karim@kbc.com">Email</a>
-                  <a href="#">LinkedIn</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="member-card-full" data-category="coordinators">
-              <div class="member-avatar-full">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div class="member-info">
-                <h3>Nusrat Jahan</h3>
-                <p class="member-role-full">Workshop Coordinator</p>
-                <p class="member-department">Department: Civil</p>
-                <p class="member-bio-full">Passionate educator focused on skill development and student empowerment. Nusrat designs and delivers engaging workshops on communication and leadership.</p>
-                <div class="member-contact">
-                  <a href="mailto:nusrat@kbc.com">Email</a>
-                  <a href="#">LinkedIn</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="member-card-full" data-category="coordinators">
-              <div class="member-avatar-full">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div class="member-info">
-                <h3>Rashid Ahmed</h3>
-                <p class="member-role-full">Treasurer</p>
-                <p class="member-department">Department: IPE</p>
-                <p class="member-bio-full">Financial steward ensuring resources support our mission and growth. Rashid manages budgets and sponsorships for all KBC activities.</p>
-                <div class="member-contact">
-                  <a href="mailto:rashid@kbc.com">Email</a>
-                  <a href="#">LinkedIn</a>
-                </div>
-              </div>
-            </article>
-
-            <!-- Volunteers -->
-            <article class="member-card-full" data-category="volunteers">
-              <div class="member-avatar-full">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div class="member-info">
-                <h3>Zara Malik</h3>
-                <p class="member-role-full">Social Media Lead</p>
-                <p class="member-department">Department: CSE</p>
-                <p class="member-bio-full">Digital communicator connecting KBC with the broader student community. Zara manages all social media channels with engaging content.</p>
-                <div class="member-contact">
-                  <a href="mailto:zara@kbc.com">Email</a>
-                  <a href="#">LinkedIn</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="member-card-full" data-category="volunteers">
-              <div class="member-avatar-full">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div class="member-info">
-                <h3>Imran Hossain</h3>
-                <p class="member-role-full">Content Coordinator</p>
-                <p class="member-department">Department: EEE</p>
-                <p class="member-bio-full">Creative storyteller documenting KBC's journey. Imran produces videos, blogs, and promotional materials for our events and programs.</p>
-                <div class="member-contact">
-                  <a href="mailto:imran@kbc.com">Email</a>
-                  <a href="#">LinkedIn</a>
-                </div>
-              </div>
-            </article>
-
-            <article class="member-card-full" data-category="volunteers">
-              <div class="member-avatar-full">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              </div>
-              <div class="member-info">
-                <h3>Sabrina Begum</h3>
-                <p class="member-role-full">Volunteer Lead</p>
-                <p class="member-department">Department: Architecture</p>
-                <p class="member-bio-full">Energetic team builder coordinating volunteer activities and team initiatives. Sabrina ensures smooth execution of all KBC events and activities.</p>
-                <div class="member-contact">
-                  <a href="mailto:sabrina@kbc.com">Email</a>
-                  <a href="#">LinkedIn</a>
-                </div>
-              </div>
-            </article>
+            <asp:Repeater ID="rptMembers" runat="server">
+              <ItemTemplate>
+                <article class="member-card-full" data-category='<%# Eval("Category") %>'>
+                  <div class="member-avatar-full">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  </div>
+                  <div class="member-info">
+                    <h3><%# Eval("Name") %></h3>
+                    <p class="member-role-full"><%# Eval("Role") %></p>
+                    <p class="member-department">Department: <%# Eval("Department") %></p>
+                    <p class="member-bio-full"><%# Eval("Bio") %></p>
+                    <div class="member-contact">
+                      <a href='<%# "mailto:" + Eval("Email") %>'>Email</a>
+                      <a href='<%# Eval("LinkedInUrl") %>'>LinkedIn</a>
+                    </div>
+                  </div>
+                </article>
+              </ItemTemplate>
+            </asp:Repeater>
           </div>
         </div>
       </section>

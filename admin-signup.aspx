@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin-signup.aspx.cs" Inherits="KBC.admin_signup" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin-signup.aspx.cs" Inherits="KBC.admin_signup" %>
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -38,23 +38,24 @@
           </div>
 
           <div class="auth-form">
+            <asp:Label ID="lblMessage" runat="server" CssClass="message-label" ForeColor="#FF6B6B" Font-Bold="true" Style="display:block; margin-bottom:10px;" />
             <label>
               <span>Full name</span>
-              <input type="text" name="name" placeholder="Your full name" required>
+              <asp:TextBox ID="txtName" runat="server" placeholder="Your full name" required="required" />
             </label>
             <label>
               <span>Email address</span>
-              <input type="email" name="email" placeholder="admin@kbcofficial.com" required>
+              <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="admin@kbcofficial.com" required="required" />
             </label>
             <label>
               <span>Password</span>
-              <input type="password" name="password" placeholder="Choose a strong password" required>
+              <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="Choose a strong password" required="required" />
             </label>
             <label>
               <span>Confirm password</span>
-              <input type="password" name="confirm_password" placeholder="Repeat your password" required>
+              <asp:TextBox ID="txtConfirmPassword" runat="server" TextMode="Password" placeholder="Repeat your password" required="required" />
             </label>
-            <button type="submit" class="btn-primary">Signup</button>
+            <asp:Button ID="btnSignup" runat="server" Text="Signup" CssClass="btn-primary" OnClick="btnSignup_Click" />
             <p class="auth-note">Already have an account? <a href="admin-login.aspx">Login here</a></p>
           </div>
         </section>
