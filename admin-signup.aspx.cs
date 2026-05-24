@@ -58,7 +58,7 @@ namespace KBC
                     {
                         insertCmd.Parameters.AddWithValue("@Name", name);
                         insertCmd.Parameters.AddWithValue("@Email", email);
-                        insertCmd.Parameters.AddWithValue("@Password", password); // Stored plaintext for lab simplicity as required
+                        insertCmd.Parameters.AddWithValue("@Password", password); 
 
                         int rowsAffected = insertCmd.ExecuteNonQuery();
 

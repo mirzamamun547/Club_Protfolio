@@ -12,7 +12,7 @@ namespace KBC
         {
             if (!IsPostBack)
             {
-                // Query string example: check if navigated here from successful signup
+                
                 if (Request.QueryString["signup"] == "success")
                 {
                     lblMessage.ForeColor = System.Drawing.Color.MediumSpringGreen;
@@ -45,7 +45,7 @@ namespace KBC
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@Email", email);
-                        cmd.Parameters.AddWithValue("@Password", password); // Plain text for simplicity in lab
+                        cmd.Parameters.AddWithValue("@Password", password); 
 
                         object result = cmd.ExecuteScalar();
 

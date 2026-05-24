@@ -67,7 +67,7 @@
               <h3>Manage Events</h3>
               <p>View and edit upcoming club events.</p>
             </div>
-            <a href="#" class="btn-primary">+ Add Event</a>
+            <a href="addevents.aspx" class="btn-primary">+ Add Event</a>
           </div>
           <div class="table-wrap">
             <asp:GridView ID="gvEvents" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%" CssClass="admin-grid">
@@ -98,7 +98,7 @@
               <h3>Manage Members</h3>
               <p>Edit member roles and contact details.</p>
             </div>
-            <a href="lab-crud.aspx" class="btn-primary">+ Add Member (CRUD Lab)</a>
+            <a href="addmember.aspx" class="btn-primary">+ Add Member (CRUD Lab)</a>
           </div>
           <div class="table-wrap">
             <asp:GridView ID="gvMembers" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%">
@@ -123,7 +123,7 @@
               <h3>Manage Programs</h3>
               <p>Track active programs and update descriptions.</p>
             </div>
-            <a href="lab-crud.aspx" class="btn-primary">+ Add Program (CRUD Lab)</a>
+            <a href="addprogram.aspx" class="btn-primary">+ Add Program (CRUD Lab)</a>
           </div>
           <div class="table-wrap">
             <asp:GridView ID="gvPrograms" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%">
