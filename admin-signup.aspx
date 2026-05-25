@@ -1,33 +1,14 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin-signup.aspx.cs" Inherits="KBC.admin_signup" %>
-<!DOCTYPE html>
-<html lang="en">
-<head runat="server">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Signup | KBC Official</title>
-  <link rel="stylesheet" href="admin-signup.css">
-</head>
-<body class="login-page">
-  <form id="form1" runat="server">
-    <header class="site-header login-header">
-      <div class="container header-inner">
-        <div class="brand">
-          <img src="logo.png" alt="KBC Logo">
-          <div class="brand-text">
-            <span>KBC</span>
-            <p>KUET Business & Entrepreneurship Club</p>
-          </div>
-        </div>
-        <div class="header-actions">
-          <a href="index.aspx" class="btn-secondary">Home</a>
-          <a href="admin-login.aspx" class="btn-secondary">Admin Login</a>
-        </div>
-        <div class="header-note">
-          <p>Admin Signup</p>
-        </div>
-      </div>
-    </header>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin-signup.aspx.cs" Inherits="KBC.admin_signup" MasterPageFile="~/Site.Master" %>
 
+<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
+  Admin Signup | KBC Official
+</asp:Content>
+
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
+  <link rel="stylesheet" href="admin-signup.css">
+</asp:Content>
+
+<asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <main class="login-section">
       <div class="container login-shell">
         <section class="login-panel">
@@ -61,6 +42,7 @@
         </section>
       </div>
     </main>
-  </form>
-</body>
-</html>
+</asp:Content>
+
+<asp:Content ID="ScriptContent" ContentPlaceHolderID="ScriptContent" runat="server">
+</asp:Content>

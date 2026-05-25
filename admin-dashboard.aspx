@@ -1,14 +1,14 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin-dashboard.aspx.cs" Inherits="KBC.admin_dashboard" %>
-<!DOCTYPE html>
-<html lang="en">
-<head runat="server">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard | KBC Official</title>
+<%@ Page Language="C#" AutoEventWireup="true" CodeFile="admin-dashboard.aspx.cs" Inherits="KBC.admin_dashboard" MasterPageFile="~/Site.Master" %>
+
+<asp:Content ID="TitleContent" ContentPlaceHolderID="TitleContent" runat="server">
+  Admin Dashboard | KBC Official
+</asp:Content>
+
+<asp:Content ID="HeadContent" ContentPlaceHolderID="HeadContent" runat="server">
   <link rel="stylesheet" href="admin-dashboard.css">
-</head>
-<body>
-  <form id="form1" runat="server">
+</asp:Content>
+
+<asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="dashboard-shell">
       <aside class="dashboard-sidebar">
         <div class="sidebar-brand">
@@ -149,6 +149,7 @@
         </section>
       </main>
     </div>
-  </form>
-</body>
-</html>
+</asp:Content>
+
+<asp:Content ID="ScriptContent" ContentPlaceHolderID="ScriptContent" runat="server">
+</asp:Content>
