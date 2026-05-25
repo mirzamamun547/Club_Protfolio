@@ -62,6 +62,8 @@
                   </div>
                   <p class="event-desc">Join KUET Business and Entrepreneurship Club at <%# Eval("EventName") %> for an inspiring and educational session.</p>
                   <a href='<%# Eval("FacebookUrl") %>' target="_blank" class="btn-secondary event-btn">View Event Details</a>
+                  &nbsp;
+                  <a href='<%# "register.aspx?eid=" + Eval("Id") %>' class="btn-primary event-btn">Register</a>
                 </div>
               </article>
             </ItemTemplate>

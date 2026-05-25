@@ -24,7 +24,7 @@ namespace KBC
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                string query = "SELECT EventName, EventDate, Location, Status, FacebookUrl, ImageGradient FROM Events ORDER BY EventDate DESC";
+                string query = "SELECT Id, EventName, EventDate, Location, Status, FacebookUrl, ImageGradient FROM Events ORDER BY EventDate DESC";
 
                 using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
                 {
