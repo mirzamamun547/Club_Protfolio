@@ -173,8 +173,8 @@
         <!-- Event Details Section -->
         <div class="event-details">
           <h3><asp:Label ID="lblEventName" runat="server" /></h3>
-          <p><strong>📅 Date:</strong> <asp:Label ID="lblEventDate" runat="server" /></p>
-          <p><strong>📍 Location:</strong> <asp:Label ID="lblLocation" runat="server" /></p>
+          <p><strong> Date:</strong> <asp:Label ID="lblEventDate" runat="server" /></p>
+          <p><strong> Location:</strong> <asp:Label ID="lblLocation" runat="server" /></p>
         </div>
 
         <asp:HiddenField ID="hfEventId" runat="server" />

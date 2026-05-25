@@ -33,7 +33,10 @@
           <ItemTemplate>
             <article class='member-card-full' data-category='<%# Eval("Category") %>'>
               <div class='member-avatar-full'>
-                <svg width='64' height='64' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'></path><circle cx='12' cy='7' r='4'></circle></svg>
+                <asp:Image ID="imgMember" runat="server"
+                    ImageUrl='<%# string.IsNullOrEmpty(Eval("PhotoPath").ToString()) 
+                        ? "~/images/default-member.png" 
+                        : ResolveUrl(Eval("PhotoPath").ToString()) %>' Style="width:100%; height:100%; border-radius:50%; object-fit:cover;" />
               </div>
               <div class='member-info'>
                 <h3><%# Eval("Name") %></h3>

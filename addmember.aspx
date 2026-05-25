@@ -58,21 +58,34 @@
   <div class="crud-section">
     <h2>Add Member</h2>
     <asp:Label ID="lblMemberMsg" runat="server" ForeColor="Red" />
-    <div class="crud-form">
+    <div class="crud-form" style="flex-direction: column; align-items: stretch;">
       <asp:TextBox ID="txtMemberName" runat="server" placeholder="Name" />
       <asp:TextBox ID="txtMemberRole" runat="server" placeholder="Role" />
       <asp:TextBox ID="txtMemberDept" runat="server" placeholder="Department" />
       <asp:TextBox ID="txtMemberEmail" runat="server" placeholder="Email" />
+      <asp:TextBox ID="txtMemberLinkedIn" runat="server" placeholder="LinkedIn URL (optional)" />
+      <asp:TextBox ID="txtMemberBio" runat="server" placeholder="Short bio (optional)" TextMode="MultiLine" Rows="3" />
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <label style="color: #cbd5e1; font-size: 14px;">Photo:</label>
+        <asp:FileUpload ID="fuMemberPhoto" runat="server" accept="image/*" />
+      </div>
       <asp:Button ID="btnAddMember" runat="server" Text="Add Member" OnClick="btnAddMember_Click" />
     </div>
 
     <h3>Members</h3>
     <asp:GridView ID="gvMembers" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvMembers_RowDeleting" CssClass="crud-table" GridLines="None" Width="100%">
       <Columns>
+        <asp:TemplateField HeaderText="Photo">
+          <ItemTemplate>
+            <img src='<%# Eval("PhotoPath") %>' alt="Photo" style="width: 40px; height: 40px; border-radius: 4px; object-fit: cover;" />
+          </ItemTemplate>
+        </asp:TemplateField>
         <asp:BoundField DataField="Name" HeaderText="Name" />
         <asp:BoundField DataField="Role" HeaderText="Role" />
         <asp:BoundField DataField="Department" HeaderText="Department" />
         <asp:BoundField DataField="Email" HeaderText="Email" />
+        <asp:BoundField DataField="LinkedInUrl" HeaderText="LinkedIn" />
+        <asp:BoundField DataField="Bio" HeaderText="Bio" />
         <asp:ButtonField CommandName="Delete" Text="Delete" />
       </Columns>
     </asp:GridView>

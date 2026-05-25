@@ -23,24 +23,24 @@ namespace KBC
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                string query = "SELECT Name, Role, Department, Email, Bio, LinkedInUrl, Category FROM Members ORDER BY Category, Name ASC";
+                string query = "SELECT Name, Role, Department, Email, Bio, LinkedInUrl, PhotoPath, Category FROM Members ORDER BY Category, Name ASC";
 
-                using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
-                {
-                    DataTable dt = new DataTable();
-                    try
-                    {
-                        da.Fill(dt);
-                        rptMembers.DataSource = dt;
-                        rptMembers.DataBind();
-                    }
-                    catch (Exception ex)
-                    {
-                        // Log or handle error
-                        Response.Write("<script>alert('Error loading members: " + ex.Message.Replace("'", "\\'") + "');</script>");
+                            using (SqlDataAdapter da = new SqlDataAdapter(query, conn))
+                                {
+                                    DataTable dt = new DataTable();
+                                    try
+                                    {
+                                        da.Fill(dt);
+                                        rptMembers.DataSource = dt;
+                                        rptMembers.DataBind();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        // Log or handle error
+                                        Response.Write("<script>alert('Error loading members: " + ex.Message.Replace("'", "\\'") + "');</script>");
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-            }
-        }
-    }
-}

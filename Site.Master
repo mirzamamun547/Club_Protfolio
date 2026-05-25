@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.Master.cs" Inherits="KBC.Site" %>
 
 <!DOCTYPE html>
@@ -148,8 +149,8 @@
         </div>
         <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 20px;">
         <div style="text-align: center;">
-          <p style="color: #94a3b8; font-size: 14px;">© 2026 KUET Business & Entrepreneurship Club. All rights reserved.</p>
-          <p style="color: #94a3b8; font-size: 12px; margin-top: 10px;">Designed with ❤️ for the KUET Community</p>
+          <p style="color: #94a3b8; font-size: 14px;">&copy; 2026 KUET Business &amp; Entrepreneurship Club. All rights reserved.</p>
+          <p style="color: #94a3b8; font-size: 12px; margin-top: 10px;">Designed with &hearts; for the KUET Community</p>
         </div>
       </div>
     </footer>
