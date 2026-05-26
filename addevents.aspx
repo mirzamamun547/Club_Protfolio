@@ -48,6 +48,9 @@
     }
     .crud-table th { color: #f8fafc; font-weight: 600; }
     .crud-table a { color: #ef4444; text-decoration: none; font-weight: 600; }
+    .crud-table a:hover { color: #f87171; }
+    .cmd-buttons a { color: #6366f1; margin-right: 10px; }
+    .cmd-buttons a:hover { color: #818cf8; }
     .crud-back { display: inline-block; margin-top: 20px; color: #6366f1; text-decoration: none; font-size: 14px; }
     .crud-back:hover { color: #818cf8; }
   </style>
@@ -62,17 +65,27 @@
       <asp:TextBox ID="txtEventDate" runat="server" placeholder="yyyy-MM-dd" />
       <asp:TextBox ID="txtEventLocation" runat="server" placeholder="Location" />
       <asp:TextBox ID="txtEventStatus" runat="server" placeholder="Status" />
-      <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" OnClick="btnAddEvent_Click" />
+      <asp:HiddenField ID="hfEditingEventId" runat="server" Value="0" />
+      <div style="display: flex; gap: 12px;">
+        <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" OnClick="btnAddEvent_Click" />
+        <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCancelEdit_Click" style="background: #64748b; display: none;" />
+      </div>
     </div>
 
     <h3>Events</h3>
-    <asp:GridView ID="gvEventsCrud" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvEventsCrud_RowDeleting" CssClass="crud-table" GridLines="None" Width="100%">
+    <asp:GridView ID="gvEventsCrud" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvEventsCrud_RowDeleting" OnRowEditing="gvEventsCrud_RowEditing" OnRowUpdating="gvEventsCrud_RowUpdating" CssClass="crud-table" GridLines="None" Width="100%">
       <Columns>
         <asp:BoundField DataField="EventName" HeaderText="Event" />
         <asp:BoundField DataField="EventDate" HeaderText="Date" DataFormatString="{0:yyyy-MM-dd}" />
         <asp:BoundField DataField="Location" HeaderText="Location" />
         <asp:BoundField DataField="Status" HeaderText="Status" />
-        <asp:ButtonField CommandName="Delete" Text="Delete" />
+        <asp:TemplateField HeaderText="Actions">
+          <ItemTemplate>
+            <asp:LinkButton ID="lbEdit" runat="server" CommandName="Edit" Text="Edit" />
+            <span style="margin: 0 5px;">|</span>
+            <asp:LinkButton ID="lbDelete" runat="server" CommandName="Delete" Text="Delete" />
+          </ItemTemplate>
+        </asp:TemplateField>
       </Columns>
     </asp:GridView>
 

@@ -49,6 +49,9 @@
     }
     .crud-table th { color: #f8fafc; font-weight: 600; }
     .crud-table a { color: #ef4444; text-decoration: none; font-weight: 600; }
+    .crud-table a:hover { color: #f87171; }
+    .cmd-buttons a { color: #6366f1; margin-right: 10px; }
+    .cmd-buttons a:hover { color: #818cf8; }
     .crud-back { display: inline-block; margin-top: 20px; color: #6366f1; text-decoration: none; font-size: 14px; }
     .crud-back:hover { color: #818cf8; }
   </style>
@@ -69,11 +72,20 @@
         <label style="color: #cbd5e1; font-size: 14px;">Photo:</label>
         <asp:FileUpload ID="fuMemberPhoto" runat="server" accept="image/*" />
       </div>
-      <asp:Button ID="btnAddMember" runat="server" Text="Add Member" OnClick="btnAddMember_Click" />
+      <asp:DropDownList ID="ddlMemberCategory" runat="server" CssClass="crud-form-dropdown" style="padding: 10px 14px; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(255, 255, 255, 0.05); color: #f8fafc; font-size: 14px; min-width: 160px;">
+        <asp:ListItem Text="Leadership" Value="leadership" />
+        <asp:ListItem Text="Coordinators" Value="coordinators" />
+        <asp:ListItem Text="Volunteers" Value="volunteers" />
+      </asp:DropDownList>
+      <asp:HiddenField ID="hfEditingMemberId" runat="server" Value="0" />
+      <div style="display: flex; gap: 12px;">
+        <asp:Button ID="btnAddMember" runat="server" Text="Add Member" OnClick="btnAddMember_Click" />
+        <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCancelEdit_Click" style="background: #64748b; display: none;" />
+      </div>
     </div>
 
     <h3>Members</h3>
-    <asp:GridView ID="gvMembers" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvMembers_RowDeleting" CssClass="crud-table" GridLines="None" Width="100%">
+    <asp:GridView ID="gvMembers" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvMembers_RowDeleting" OnRowEditing="gvMembers_RowEditing" CssClass="crud-table" GridLines="None" Width="100%">
       <Columns>
         <asp:TemplateField HeaderText="Photo">
           <ItemTemplate>
@@ -86,6 +98,7 @@
         <asp:BoundField DataField="Email" HeaderText="Email" />
         <asp:BoundField DataField="LinkedInUrl" HeaderText="LinkedIn" />
         <asp:BoundField DataField="Bio" HeaderText="Bio" />
+        <asp:CommandField ShowEditButton="True" EditText="Edit" CancelText="Cancel" UpdateText="Update" ItemStyle-CssClass="cmd-buttons" />
         <asp:ButtonField CommandName="Delete" Text="Delete" />
       </Columns>
     </asp:GridView>

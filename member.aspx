@@ -22,10 +22,10 @@
   <section class='section section-members-full'>
     <div class='container'>
       <div class='members-filter reveal'>
-        <button class='filter-btn active' data-filter='all'>All</button>
-        <button class='filter-btn' data-filter='leadership'>Leadership</button>
-        <button class='filter-btn' data-filter='coordinators'>Coordinators</button>
-        <button class='filter-btn' data-filter='volunteers'>Volunteers</button>
+        <button type='button' class='filter-btn active' data-filter='all'>All</button>
+        <button type='button' class='filter-btn' data-filter='leadership'>Leadership</button>
+        <button type='button' class='filter-btn' data-filter='coordinators'>Coordinators</button>
+        <button type='button' class='filter-btn' data-filter='volunteers'>Volunteers</button>
       </div>
 
       <div class='members-grid-full reveal'>
@@ -64,5 +64,5 @@
 </asp:Content>
 
 <asp:Content ID='ScriptContent' ContentPlaceHolderID='ScriptContent' runat='server'>
-  <script src='member.js'></script>
+  <script src='member.js?v=2'></script>
 </asp:Content>

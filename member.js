@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', function() {
       memberCards.forEach(card => {
         const cardCategory = card.getAttribute('data-category');
 
-        if (filterValue === 'all' || cardCategory === filterValue) {
+        // Filter cards – make comparison case‑insensitive and allow partial matches
+        const filter = filterValue.toLowerCase();
+        const cardCat = (cardCategory || '').toLowerCase();
+        if (filter === 'all' || cardCat.includes(filter)) {
           card.classList.remove('hide');
           setTimeout(() => {
             card.style.display = 'flex';

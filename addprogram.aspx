@@ -48,6 +48,9 @@
     }
     .crud-table th { color: #f8fafc; font-weight: 600; }
     .crud-table a { color: #ef4444; text-decoration: none; font-weight: 600; }
+    .crud-table a:hover { color: #f87171; }
+    .cmd-buttons a { color: #6366f1; margin-right: 10px; }
+    .cmd-buttons a:hover { color: #818cf8; }
     .crud-back { display: inline-block; margin-top: 20px; color: #6366f1; text-decoration: none; font-size: 14px; }
     .crud-back:hover { color: #818cf8; }
   </style>
@@ -62,16 +65,21 @@
       <asp:TextBox ID="txtProgramDesc" runat="server" placeholder="Description" />
       <asp:TextBox ID="txtProgramType" runat="server" placeholder="Type" />
       <asp:TextBox ID="txtProgramStatus" runat="server" placeholder="Status" />
-      <asp:Button ID="btnAddProgram" runat="server" Text="Add Program" OnClick="btnAddProgram_Click" />
+      <asp:HiddenField ID="hfEditingProgramId" runat="server" Value="0" />
+      <div style="display: flex; gap: 12px;">
+        <asp:Button ID="btnAddProgram" runat="server" Text="Add Program" OnClick="btnAddProgram_Click" />
+        <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCancelEdit_Click" style="background: #64748b; display: none;" />
+      </div>
     </div>
 
     <h3>Programs</h3>
-    <asp:GridView ID="gvProgramsCrud" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvProgramsCrud_RowDeleting" CssClass="crud-table" GridLines="None" Width="100%">
+    <asp:GridView ID="gvProgramsCrud" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvProgramsCrud_RowDeleting" OnRowEditing="gvProgramsCrud_RowEditing" CssClass="crud-table" GridLines="None" Width="100%">
       <Columns>
         <asp:BoundField DataField="ProgramName" HeaderText="Program" />
         <asp:BoundField DataField="Description" HeaderText="Description" />
         <asp:BoundField DataField="ProgramType" HeaderText="Type" />
         <asp:BoundField DataField="Status" HeaderText="Status" />
+        <asp:CommandField ShowEditButton="True" EditText="Edit" CancelText="Cancel" UpdateText="Update" ItemStyle-CssClass="cmd-buttons" />
         <asp:ButtonField CommandName="Delete" Text="Delete" />
       </Columns>
     </asp:GridView>
