@@ -141,5 +141,17 @@ namespace KBC
             }
             BindPrograms();
         }
+
+        protected void gvProgramsCrud_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
+        {
+            gvProgramsCrud.EditIndex = -1;
+            BindPrograms();
+        }
+
+        protected void gvProgramsCrud_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
+        {
+            gvProgramsCrud.EditIndex = -1;
+            BindPrograms();
+        }
     }
 }

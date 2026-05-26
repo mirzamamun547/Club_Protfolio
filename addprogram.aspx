@@ -73,7 +73,7 @@
     </div>
 
     <h3>Programs</h3>
-    <asp:GridView ID="gvProgramsCrud" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvProgramsCrud_RowDeleting" OnRowEditing="gvProgramsCrud_RowEditing" CssClass="crud-table" GridLines="None" Width="100%">
+    <asp:GridView ID="gvProgramsCrud" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvProgramsCrud_RowDeleting" OnRowEditing="gvProgramsCrud_RowEditing" OnRowUpdating="gvProgramsCrud_RowUpdating" OnRowCancelingEdit="gvProgramsCrud_RowCancelingEdit" CssClass="crud-table" GridLines="None" Width="100%">
       <Columns>
         <asp:BoundField DataField="ProgramName" HeaderText="Program" />
         <asp:BoundField DataField="Description" HeaderText="Description" />
