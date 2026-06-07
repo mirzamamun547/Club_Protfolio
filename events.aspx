@@ -21,7 +21,7 @@
           <article class="event-card">
             <div class="event-image">
               <span class="event-badge"><%# Eval("Status") %></span>
-              <div style="width: 100%; height: 200px; background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);"></div>
+              <img src='<%# ResolveUrl(string.IsNullOrEmpty(Eval("PhotoPath").ToString()) ? "~/images/default-event.png" : Eval("PhotoPath").ToString()) %>' alt="Event" style="width: 100%; height: 200px; object-fit: cover;" />
             </div>
             <div class="event-content">
               <h3 class="event-title"><%# Eval("EventName") %></h3>
@@ -29,7 +29,7 @@
                 <span><%# Eval("EventDate", "{0:MMM d, yyyy}") %></span>
                 <span><%# Eval("Location") %></span>
               </div>
-              <p class="event-desc">Join KUET Business and Entrepreneurship Club for an inspiring and educational session.</p>
+              <p class="event-desc"><%# Eval("Description") %></p>
               <a href='<%# Eval("FacebookUrl") %>' target="_blank" class="btn-secondary event-btn">View Event Details</a>
               <a href='<%# "register.aspx?eid=" + Eval("Id") %>' class="btn-primary event-btn">Register</a>
             </div>

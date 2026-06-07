@@ -20,7 +20,7 @@ namespace KBC
             {
                 string connStr = ConfigurationManager.ConnectionStrings["KBEC_Connection"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connStr))
-                using (SqlDataAdapter da = new SqlDataAdapter("SELECT Id, EventName, EventDate, Location, Status, FacebookUrl, ImageGradient FROM Events ORDER BY EventDate DESC", conn))
+                using (SqlDataAdapter da = new SqlDataAdapter("SELECT Id, EventName, EventDate, Location, Status, FacebookUrl, ImageGradient, PhotoPath, Description FROM Events ORDER BY EventDate DESC", conn))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);

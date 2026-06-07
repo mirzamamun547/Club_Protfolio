@@ -38,10 +38,22 @@
       </section>
 
       <section id="about" class="section section-about">
+        <svg class="about-curve-bg" viewBox="0 0 1440 300" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="curveBgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#F1BF63;stop-opacity:0.25" />
+              <stop offset="50%" style="stop-color:#6366f1;stop-opacity:0.15" />
+              <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0.05" />
+            </linearGradient>
+          </defs>
+          <path d="M0,80 Q360,20 720,80 T1440,80 L1440,0 L0,0 Z" fill="url(#curveBgGradient)"></path>
+          <path d="M0,120 Q360,60 720,120 T1440,120 L1440,80 Q720,20 0,80 Z" fill="rgba(241, 191, 99, 0.08)"></path>
+        </svg>
+
         <div class="container section-heading reveal">
           <p class="eyebrow">About KBC</p>
           <h2>Helping KUETians choose the right career path</h2>
-          <p>KBC is a student-run career club at KUET that prepares members for competitive opportunities, leadership roles, and successful futures through events, training, and mentorship.</p>
+          <p>KBEC, the premier business and entrepreneurship club of Khulna University of Engineering & Technology, bridges engineering excellence with entrepreneurial vision. Through KBEC Nexus, Entrepreneurial Voice, Case Crack, workshops, seminars, startup programs, and TEDxKUET, it empowers students from idea to launch, fostering leadership, innovation, and real-world impact.</p>
         </div>
         <div class="container about-grid reveal">
           <article class="feature-card">
