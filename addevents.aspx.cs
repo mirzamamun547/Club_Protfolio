@@ -17,7 +17,7 @@ namespace KBC
         {
             string connStr = ConfigurationManager.ConnectionStrings["KBEC_Connection"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connStr))
-            using (SqlDataAdapter da = new SqlDataAdapter("SELECT Id, EventName, EventDate, Location, Status, Description, PhotoPath FROM Events ORDER BY EventDate DESC", conn))
+            using (SqlDataAdapter da = new SqlDataAdapter("SELECT Id, EventName, EventDate, Location, Status, Description, PhotoPath, MaxSeats FROM Events ORDER BY EventDate DESC", conn))
             {
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -32,7 +32,7 @@ namespace KBC
             string connStr = ConfigurationManager.ConnectionStrings["KBEC_Connection"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                using (SqlCommand cmd = new SqlCommand("SELECT Id, EventName, EventDate, Location, Status, Description, PhotoPath FROM Events WHERE Id = @id", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT Id, EventName, EventDate, Location, Status, Description, PhotoPath, MaxSeats FROM Events WHERE Id = @id", conn))
                 {
                     cmd.Parameters.AddWithValue("@id", eventId);
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
@@ -47,6 +47,7 @@ namespace KBC
                             txtEventLocation.Text = row["Location"].ToString();
                             txtEventStatus.Text = row["Status"].ToString();
                             txtEventDescription.Text = row["Description"] != DBNull.Value ? row["Description"].ToString() : "";
+                            txtMaxSeats.Text = row["MaxSeats"] != DBNull.Value ? row["MaxSeats"].ToString() : string.Empty;
                             hfEditingEventId.Value = eventId.ToString();
                             btnAddEvent.Text = "Update Event";
                             btnCancelEdit.Style["display"] = "inline-block";
@@ -134,6 +135,7 @@ namespace KBC
                         string query = "UPDATE Events SET EventName=@n, EventDate=@d, Location=@l, Status=@s, Description=@desc";
                         if (photoPath != null)
                             query += ", PhotoPath=@p";
+                        query += ", MaxSeats=@max";
                         query += " WHERE Id=@id";
 
                         using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -145,6 +147,11 @@ namespace KBC
                             cmd.Parameters.AddWithValue("@desc", string.IsNullOrEmpty(description) ? DBNull.Value : (object)description);
                             if (photoPath != null)
                                 cmd.Parameters.AddWithValue("@p", photoPath);
+                            int maxSeatsVal;
+                            if (int.TryParse(txtMaxSeats.Text.Trim(), out maxSeatsVal))
+                                cmd.Parameters.AddWithValue("@max", (object)maxSeatsVal);
+                            else
+                                cmd.Parameters.AddWithValue("@max", DBNull.Value);
                             cmd.Parameters.AddWithValue("@id", eventId);
                             cmd.ExecuteNonQuery();
                         }
@@ -153,10 +160,10 @@ namespace KBC
                     else
                     {
                         // Insert new event
-                        string query = "INSERT INTO Events (EventName, EventDate, Location, Status, Description";
+                        string query = "INSERT INTO Events (EventName, EventDate, Location, Status, Description, MaxSeats";
                         if (photoPath != null)
                             query += ", PhotoPath";
-                        query += ") VALUES (@n,@d,@l,@s,@desc";
+                        query += ") VALUES (@n,@d,@l,@s,@desc,@max";
                         if (photoPath != null)
                             query += ",@p";
                         query += ")";
@@ -168,6 +175,11 @@ namespace KBC
                             cmd.Parameters.AddWithValue("@l", location);
                             cmd.Parameters.AddWithValue("@s", status);
                             cmd.Parameters.AddWithValue("@desc", string.IsNullOrEmpty(description) ? DBNull.Value : (object)description);
+                            int maxSeatsVal;
+                            if (int.TryParse(txtMaxSeats.Text.Trim(), out maxSeatsVal))
+                                cmd.Parameters.AddWithValue("@max", (object)maxSeatsVal);
+                            else
+                                cmd.Parameters.AddWithValue("@max", DBNull.Value);
                             if (photoPath != null)
                                 cmd.Parameters.AddWithValue("@p", photoPath);
                             cmd.ExecuteNonQuery();

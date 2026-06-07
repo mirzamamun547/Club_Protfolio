@@ -20,7 +20,12 @@ namespace KBC
             {
                 string connStr = ConfigurationManager.ConnectionStrings["KBEC_Connection"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connStr))
-                using (SqlDataAdapter da = new SqlDataAdapter("SELECT Id, EventName, EventDate, Location, Status, FacebookUrl, ImageGradient, PhotoPath, Description FROM Events ORDER BY EventDate DESC", conn))
+                using (SqlDataAdapter da = new SqlDataAdapter(@"SELECT e.Id, e.EventName, e.EventDate, e.Location, e.Status, e.FacebookUrl, e.ImageGradient, e.PhotoPath, e.Description, e.MaxSeats,
+ISNULL(r.RegisteredCount,0) AS RegisteredCount,
+CASE WHEN e.MaxSeats IS NULL THEN NULL ELSE (e.MaxSeats - ISNULL(r.RegisteredCount,0)) END AS SeatsLeft
+FROM Events e
+LEFT JOIN (SELECT EventId, COUNT(*) AS RegisteredCount FROM EventRegistrations GROUP BY EventId) r ON e.Id = r.EventId
+ORDER BY e.EventDate DESC", conn))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);

@@ -30,6 +30,10 @@
                 <span><%# Eval("Location") %></span>
               </div>
               <p class="event-desc"><%# Eval("Description") %></p>
+              <div style="margin:8px 0; color:#cbd5e1; font-size:14px;">
+                <strong>Registered:</strong> <%# Eval("RegisteredCount") %>
+                <%# (Eval("SeatsLeft") == DBNull.Value) ? "" : " | <strong>Seats Left:</strong> " + Eval("SeatsLeft") %>
+              </div>
               <a href='<%# Eval("FacebookUrl") %>' target="_blank" class="btn-secondary event-btn">View Event Details</a>
               <a href='<%# "register.aspx?eid=" + Eval("Id") %>' class="btn-primary event-btn">Register</a>
             </div>

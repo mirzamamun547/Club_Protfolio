@@ -1,6 +1,7 @@
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Net.Mail;
 
 namespace KBC
 {
@@ -26,23 +27,42 @@ namespace KBC
         {
             string connStr = ConfigurationManager.ConnectionStrings["KBEC_Connection"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(connStr))
-            using (SqlCommand cmd = new SqlCommand("SELECT EventName, EventDate, Location FROM Events WHERE Id = @id", conn))
+            using (SqlCommand cmd = new SqlCommand(@"SELECT e.EventName, e.EventDate, e.Location, e.MaxSeats,
+ISNULL(r.RegisteredCount,0) AS RegisteredCount
+FROM Events e
+LEFT JOIN (SELECT EventId, COUNT(*) AS RegisteredCount FROM EventRegistrations GROUP BY EventId) r ON e.Id = r.EventId
+WHERE e.Id = @id", conn))
             {
                 cmd.Parameters.AddWithValue("@id", id);
                 conn.Open();
                 using (SqlDataReader rdr = cmd.ExecuteReader())
                 {
                     if (rdr.Read())
-                    {
-                        pnlEvent.Visible = true;
-                        lblEventName.Text = rdr["EventName"].ToString();
-                        // store event id in hidden field for postback
-                        hfEventId.Value = id.ToString();
-                        DateTime d;
-                        if (DateTime.TryParse(rdr["EventDate"].ToString(), out d))
-                            lblEventDate.Text = d.ToString("MMM d, yyyy");
-                        lblLocation.Text = rdr["Location"].ToString();
-                    }
+                        {
+                            pnlEvent.Visible = true;
+                            lblEventName.Text = rdr["EventName"].ToString();
+                            // store event id in hidden field for postback
+                            hfEventId.Value = id.ToString();
+                            DateTime d;
+                            if (DateTime.TryParse(rdr["EventDate"].ToString(), out d))
+                                lblEventDate.Text = d.ToString("MMM d, yyyy");
+                            lblLocation.Text = rdr["Location"].ToString();
+                            object maxObj = rdr["MaxSeats"];
+                            object regCountObj = rdr["RegisteredCount"];
+                            int? maxSeats = maxObj == DBNull.Value ? (int?)null : Convert.ToInt32(maxObj);
+                            int regCount = regCountObj == DBNull.Value ? 0 : Convert.ToInt32(regCountObj);
+                            if (maxSeats.HasValue)
+                            {
+                                int seatsLeft = Math.Max(0, maxSeats.Value - regCount);
+                                lblSeatsInfo.Text = string.Format("Registered: {0} | Seats left: {1}", regCount, seatsLeft);
+                                if (seatsLeft <= 0)
+                                    btnRegister.Enabled = false;
+                            }
+                            else
+                            {
+                                lblSeatsInfo.Text = string.Format("Registered: {0} | Seats left: Unlimited", regCount);
+                            }
+                        }
                     else
                     {
                         lblMsg.Text = "Event not found.";
@@ -74,30 +94,93 @@ namespace KBC
 
                 string connStr = ConfigurationManager.ConnectionStrings["KBEC_Connection"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connStr))
-                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO EventRegistrations
-                    (FullName, StudentId, Department, Email, Phone, EventName, WhyAttend, Expectations)
-                    VALUES (@FullName, @StudentId, @Department, @Email, @Phone, @EventName, @WhyAttend, @Expectations)", conn))
                 {
-                    cmd.Parameters.AddWithValue("@FullName", (object)fullName ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@StudentId", (object)studentId ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Department", (object)dept ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Email", (object)email ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Phone", (object)phone ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@EventName", (object)eventName ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@WhyAttend", (object)why ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@Expectations", (object)expect ?? DBNull.Value);
-
                     conn.Open();
-                    int rows = cmd.ExecuteNonQuery();
-                    if (rows > 0)
+                    using (SqlTransaction tran = conn.BeginTransaction())
                     {
-                        DisplayMessage("Registration submitted successfully. Thank you!", "success");
-                        // clear fields
-                        txtFullName.Text = txtStudentId.Text = txtDepartment.Text = txtEmail.Text = txtPhone.Text = txtWhyAttend.Text = txtExpectations.Text = string.Empty;
-                    }
-                    else
-                    {
-                        DisplayMessage("Unable to save registration. Please try again.", "error");
+                        try
+                        {
+                            int eventId = 0;
+                            if (!int.TryParse(hfEventId.Value, out eventId))
+                            {
+                                DisplayMessage("Invalid event selected.", "error");
+                                return;
+                            }
+
+                            // Check current registrations count and MaxSeats with locking to avoid race conditions
+                            int regCount = 0;
+                            int? maxSeats = null;
+                            using (SqlCommand chkCmd = new SqlCommand(@"SELECT @regCount = COUNT(*) FROM EventRegistrations WITH (UPDLOCK, HOLDLOCK) WHERE EventId = @EventId;
+                                SELECT @maxSeats = MaxSeats FROM Events WHERE Id = @EventId;", conn, tran))
+                            {
+                                chkCmd.Parameters.AddWithValue("@EventId", eventId);
+                                var pReg = new SqlParameter("@regCount", System.Data.SqlDbType.Int) { Direction = System.Data.ParameterDirection.Output };
+                                var pMax = new SqlParameter("@maxSeats", System.Data.SqlDbType.Int) { Direction = System.Data.ParameterDirection.Output, IsNullable = true };
+                                chkCmd.Parameters.Add(pReg);
+                                chkCmd.Parameters.Add(pMax);
+                                chkCmd.ExecuteNonQuery();
+                                regCount = (int)(chkCmd.Parameters["@regCount"].Value ?? 0);
+                                object maxObj = chkCmd.Parameters["@maxSeats"].Value;
+                                if (maxObj != DBNull.Value) maxSeats = Convert.ToInt32(maxObj);
+                            }
+
+                            if (maxSeats.HasValue && regCount >= maxSeats.Value)
+                            {
+                                tran.Rollback();
+                                DisplayMessage("Registration closed: event is full.", "error");
+                                return;
+                            }
+
+                            using (SqlCommand cmd = new SqlCommand(@"INSERT INTO EventRegistrations
+                                (EventId, FullName, StudentId, Department, Email, Phone, WhyAttend, Expectations)
+                                VALUES (@EventId, @FullName, @StudentId, @Department, @Email, @Phone, @WhyAttend, @Expectations);", conn, tran))
+                            {
+                                cmd.Parameters.AddWithValue("@EventId", eventId);
+                                cmd.Parameters.AddWithValue("@FullName", (object)fullName ?? DBNull.Value);
+                                cmd.Parameters.AddWithValue("@StudentId", (object)studentId ?? DBNull.Value);
+                                cmd.Parameters.AddWithValue("@Department", (object)dept ?? DBNull.Value);
+                                cmd.Parameters.AddWithValue("@Email", (object)email ?? DBNull.Value);
+                                cmd.Parameters.AddWithValue("@Phone", (object)phone ?? DBNull.Value);
+                                cmd.Parameters.AddWithValue("@WhyAttend", (object)why ?? DBNull.Value);
+                                cmd.Parameters.AddWithValue("@Expectations", (object)expect ?? DBNull.Value);
+
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            tran.Commit();
+
+                            // Send notification emails (admin + attendee)
+                            try
+                            {
+                                SendRegistrationEmails(fullName, email, lblEventName.Text, hfEventId.Value);
+                            }
+                            catch (Exception exEmail)
+                            {
+                                // Log or ignore email errors; do not fail registration
+                            }
+
+                            DisplayMessage("Registration submitted successfully. Thank you!", "success");
+                            // clear fields
+                            txtFullName.Text = txtStudentId.Text = txtDepartment.Text = txtEmail.Text = txtPhone.Text = txtWhyAttend.Text = txtExpectations.Text = string.Empty;
+                        }
+                        catch (SqlException ex)
+                        {
+                            tran.Rollback();
+                            // 2627 and 2601 are unique constraint violation numbers in SQL Server
+                            if (ex.Number == 2627 || ex.Number == 2601)
+                            {
+                                DisplayMessage("You have already registered for this event.", "error");
+                            }
+                            else
+                            {
+                                DisplayMessage("Error: " + ex.Message, "error");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            tran.Rollback();
+                            DisplayMessage("Error: " + ex.Message, "error");
+                        }
                     }
                 }
             }
@@ -144,6 +227,31 @@ namespace KBC
         private void DisplayMessage(string message, string type)
         {
             lblMsg.Text = "<div class='message-box " + type + "'>" + System.Web.HttpUtility.HtmlEncode(message) + "</div>";
+        }
+
+        private void SendRegistrationEmails(string fullName, string attendeeEmail, string eventName, string eventId)
+        {
+            string adminEmail = ConfigurationManager.AppSettings["AdminEmail"] ?? "admin@kbcofficial.com";
+
+            // Email to attendee
+            var attendeeMsg = new MailMessage();
+            attendeeMsg.To.Add(attendeeEmail);
+            attendeeMsg.Subject = "Registration Confirmation - " + eventName;
+            attendeeMsg.Body = string.Format("Dear {0},\n\nThank you for registering for {1}. We have received your registration.\n\nBest regards,\nKBEC Team", fullName, eventName);
+            attendeeMsg.IsBodyHtml = false;
+
+            // Email to admin
+            var adminMsg = new MailMessage();
+            adminMsg.To.Add(adminEmail);
+            adminMsg.Subject = "New Registration for " + eventName;
+            adminMsg.Body = string.Format("A new registration was submitted:\n\nName: {0}\nEmail: {1}\nEvent: {2}\nEventId: {3}\n\nVisit admin dashboard to view details.", fullName, attendeeEmail, eventName, eventId);
+            adminMsg.IsBodyHtml = false;
+
+            using (var smtp = new SmtpClient())
+            {
+                smtp.Send(attendeeMsg);
+                smtp.Send(adminMsg);
+            }
         }
     }
 }

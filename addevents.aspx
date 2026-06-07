@@ -61,21 +61,22 @@
     <h2>Add Event</h2>
     <asp:Label ID="lblEventMsg" runat="server" ForeColor="Red" />
     <div class="crud-form" style="flex-direction: column; align-items: stretch;">
-      <asp:TextBox ID="txtEventName" runat="server" placeholder="Event Name" />
-      <asp:TextBox ID="txtEventDate" runat="server" placeholder="yyyy-MM-dd" />
-      <asp:TextBox ID="txtEventLocation" runat="server" placeholder="Location" />
-      <asp:TextBox ID="txtEventStatus" runat="server" placeholder="Status" />
-      <asp:TextBox ID="txtEventDescription" runat="server" placeholder="Description (optional)" TextMode="MultiLine" Rows="4" />
-      <div style="display: flex; gap: 12px; align-items: center;">
-        <label style="color: #cbd5e1; font-size: 14px;">Photo:</label>
-        <asp:FileUpload ID="fuEventPhoto" runat="server" accept="image/*" />
+        <asp:TextBox ID="txtEventName" runat="server" placeholder="Event Name" />
+        <asp:TextBox ID="txtEventDate" runat="server" placeholder="yyyy-MM-dd" />
+        <asp:TextBox ID="txtEventLocation" runat="server" placeholder="Location" />
+        <asp:TextBox ID="txtEventStatus" runat="server" placeholder="Status" />
+        <asp:TextBox ID="txtEventDescription" runat="server" placeholder="Description (optional)" TextMode="MultiLine" Rows="4" />
+        <asp:TextBox ID="txtMaxSeats" runat="server" placeholder="Max Seats (leave empty for unlimited)" />
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <label style="color: #cbd5e1; font-size: 14px;">Photo:</label>
+          <asp:FileUpload ID="fuEventPhoto" runat="server" accept="image/*" />
+        </div>
+        <asp:HiddenField ID="hfEditingEventId" runat="server" Value="0" />
+        <div style="display: flex; gap: 12px;">
+          <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" OnClick="btnAddEvent_Click" />
+          <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCancelEdit_Click" style="background: #64748b; display: none;" />
+        </div>
       </div>
-      <asp:HiddenField ID="hfEditingEventId" runat="server" Value="0" />
-      <div style="display: flex; gap: 12px;">
-        <asp:Button ID="btnAddEvent" runat="server" Text="Add Event" OnClick="btnAddEvent_Click" />
-        <asp:Button ID="btnCancelEdit" runat="server" Text="Cancel" OnClick="btnCancelEdit_Click" style="background: #64748b; display: none;" />
-      </div>
-    </div>
 
     <h3>Events</h3>
     <asp:GridView ID="gvEventsCrud" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" OnRowDeleting="gvEventsCrud_RowDeleting" OnRowEditing="gvEventsCrud_RowEditing" OnRowCancelingEdit="gvEventsCrud_RowCancelingEdit" CssClass="crud-table" GridLines="None" Width="100%">

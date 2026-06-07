@@ -45,7 +45,8 @@ BEGIN
         Location NVARCHAR(150) NOT NULL,
         Status NVARCHAR(50) NOT NULL,
         FacebookUrl NVARCHAR(250) NULL,
-        ImageGradient NVARCHAR(200) NULL
+        ImageGradient NVARCHAR(200) NULL,
+        MaxSeats INT NULL
     );
 END
 GO
