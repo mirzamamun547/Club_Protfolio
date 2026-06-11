@@ -57,6 +57,9 @@ namespace KBC
                     cmdCount.CommandText = "SELECT COUNT(*) FROM Programs";
                     lblProgramCount.Text = cmdCount.ExecuteScalar().ToString();
 
+                    cmdCount.CommandText = "SELECT COUNT(*) FROM Advisors";
+                    lblAdvisorCount.Text = cmdCount.ExecuteScalar().ToString();
+
                     // Load events grid
                     using (SqlDataAdapter da = new SqlDataAdapter("SELECT EventName, EventDate, Location, Status FROM Events ORDER BY EventDate DESC", conn))
                     {
@@ -88,6 +91,17 @@ namespace KBC
                         gvPrograms.DataBind();
                         if (gvPrograms.HeaderRow != null)
                             gvPrograms.HeaderRow.TableSection = TableRowSection.TableHeader;
+                    }
+
+                    // Load advisors grid
+                    using (SqlDataAdapter da = new SqlDataAdapter("SELECT Name, Role, Expertise, Department, Email FROM Advisors ORDER BY Name ASC", conn))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        gvAdvisors.DataSource = dt;
+                        gvAdvisors.DataBind();
+                        if (gvAdvisors.HeaderRow != null)
+                            gvAdvisors.HeaderRow.TableSection = TableRowSection.TableHeader;
                     }
                 }
                 catch (Exception ex)

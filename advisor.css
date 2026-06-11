@@ -1,0 +1,334 @@
+/* ==================== ADVISORS PAGE ==================== */
+
+.advisors-hero {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #f8fafc;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.advisors-hero::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -100px;
+  left: 10%;
+  z-index: 0;
+}
+
+.advisors-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.advisors-hero-content .eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #6366f1;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.advisors-hero-content h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.advisors-hero-content p {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+/* ==================== ADVISORS SECTION ==================== */
+
+.section-advisors-full {
+  padding: 80px 20px;
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.advisors-filter {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 12px 28px;
+  border: 2px solid rgba(99, 102, 241, 0.4);
+  background: transparent;
+  color: #cbd5e1;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #6366f1, #4338ca);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.filter-btn:hover {
+  color: #f8fafc;
+  border-color: #6366f1;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.filter-btn:hover::before {
+  left: 0;
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #6366f1, #4338ca);
+  color: #f8fafc;
+  border-color: #6366f1;
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+}
+
+.filter-btn.active::before {
+  left: 0;
+}
+
+/* ==================== ADVISORS GRID ==================== */
+
+.advisors-grid-full {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.advisor-card-full {
+  position: relative;
+  height: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: revealFadeIn 0.6s ease-out forwards;
+}
+
+.advisor-card-full::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.7) 100%);
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.advisor-card-full:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+}
+
+.advisor-card-full:hover::before {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.85) 100%);
+}
+
+/* Hide/Show transition for filtering */
+.advisor-card-full[style*="display: none"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.advisor-card-full[style*="display: block"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.advisor-info {
+  position: relative;
+  z-index: 2;
+  padding: 30px 24px;
+  width: 100%;
+  color: #f8fafc;
+}
+
+.advisor-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a78bfa;
+  margin-bottom: 12px;
+}
+
+.advisor-info h3 {
+  font-size: 1.8rem;
+  margin: 0 0 8px 0;
+  color: #f8fafc;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.advisor-role-full {
+  color: #cbd5e1;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  font-size: 0.95rem;
+}
+
+.advisor-expertise {
+  color: #a78bfa;
+  font-size: 0.85rem;
+  margin: 0 0 16px 0;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.advisor-contact {
+  margin-top: 16px;
+}
+
+.advisor-contact a {
+  display: inline-block;
+  padding: 10px 24px;
+  background: linear-gradient(135deg, #6366f1, #4338ca);
+  color: #f8fafc;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(99, 102, 241, 0.5);
+}
+
+.advisor-contact a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.4);
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+}
+
+/* ==================== REVEAL ANIMATION ==================== */
+
+@keyframes revealFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: revealFadeIn 0.6s ease-out forwards;
+}
+
+/* ==================== RESPONSIVE ==================== */
+
+@media (max-width: 768px) {
+  .advisors-hero-content h1 {
+    font-size: 2.2rem;
+  }
+
+  .advisors-hero-content p {
+    font-size: 1rem;
+  }
+
+  .advisors-grid-full {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .advisor-card-full {
+    height: 350px;
+  }
+
+  .advisor-info {
+    padding: 24px 16px;
+  }
+
+  .advisor-info h3 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .advisors-hero {
+    padding: 60px 16px;
+  }
+
+  .advisors-hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .advisors-filter {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .advisors-grid-full {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .advisor-card-full {
+    height: 300px;
+  }
+
+  .advisor-info {
+    padding: 20px 12px;
+  }
+
+  .advisor-info h3 {
+    font-size: 1.2rem;
+  }
+
+  .advisor-label {
+    font-size: 10px;
+  }
+
+  .advisor-expertise {
+    font-size: 0.8rem;
+  }
+
+  .advisor-contact a {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}

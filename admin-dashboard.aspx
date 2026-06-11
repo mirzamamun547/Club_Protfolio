@@ -23,6 +23,7 @@
           <a href="#overview" class="nav-link active">Overview</a>
           <a href="#events" class="nav-link">Manage Events</a>
           <a href="#members" class="nav-link">Manage Members</a>
+          <a href="#advisors" class="nav-link">Manage Advisors</a>
           <a href="#programs" class="nav-link">Manage Programs</a>
           <asp:LinkButton ID="lnkLogout" runat="server" CssClass="nav-link logout" OnClick="lnkLogout_Click">Logout</asp:LinkButton>
         </nav>
@@ -55,8 +56,8 @@
               <p>Programs</p>
             </article>
             <article class="metric-card">
-              <h3>87%</h3>
-              <p>Attendance Rate</p>
+              <h3><asp:Label ID="lblAdvisorCount" runat="server" Text="0" /></h3>
+              <p>Advisors</p>
             </article>
           </div>
         </section>
@@ -105,6 +106,32 @@
               <Columns>
                 <asp:BoundField DataField="Name" HeaderText="Name" />
                 <asp:BoundField DataField="Role" HeaderText="Role" />
+                <asp:BoundField DataField="Department" HeaderText="Department" />
+                <asp:BoundField DataField="Email" HeaderText="Email" />
+                <asp:TemplateField HeaderText="Action">
+                  <ItemTemplate>
+                    <span class="action-text" style="color:var(--muted); font-size:0.95rem;">System Locked</span>
+                  </ItemTemplate>
+                </asp:TemplateField>
+              </Columns>
+            </asp:GridView>
+          </div>
+        </section>
+
+        <section id="advisors" class="dashboard-section">
+          <div class="section-heading">
+            <div>
+              <h3>Manage Advisors</h3>
+              <p>Edit advisor information and add new mentors.</p>
+            </div>
+            <a href="addadvisor.aspx" class="btn-primary">+ Add Advisor (CRUD Lab)</a>
+          </div>
+          <div class="table-wrap">
+            <asp:GridView ID="gvAdvisors" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%">
+              <Columns>
+                <asp:BoundField DataField="Name" HeaderText="Name" />
+                <asp:BoundField DataField="Role" HeaderText="Role" />
+                <asp:BoundField DataField="Expertise" HeaderText="Expertise" />
                 <asp:BoundField DataField="Department" HeaderText="Department" />
                 <asp:BoundField DataField="Email" HeaderText="Email" />
                 <asp:TemplateField HeaderText="Action">

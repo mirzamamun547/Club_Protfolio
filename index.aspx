@@ -11,12 +11,12 @@
       <section id="home" class="hero section-hero">
         <div class="container hero-grid">
           <div class="hero-copy-block reveal">
-            <p class="eyebrow">KUET Business & Entrepreneurship Club</p>
-            <h1>KBC</h1>
-            <p class="hero-copy">Igniting enthusiasm, expertise, and excellence at KUET. Empowering students to master skills, innovate, and shine globally with KBC.</p>
+            <p class="eyebrow">KBEC</p>
+            <h1>KUET Business & Entrepreneurship Club</h1>
+            <p class="hero-copy">The Premier Business and Entrepreneurship Club at KUET.Igniting enthusiasm, expertise, and excellence at KUET. Empowering students to master skills, innovate, and shine globally with KBC.</p>
             <div class="hero-actions reveal">
-              <a class="btn-secondary" href="#about">Discover More</a>
-              <a class="btn-primary" href="events.aspx">View Events</a>
+              <a class="btn-secondary" href="#about" aria-label="Discover more about KBEC">Discover More</a>
+              <a class="btn-primary" href="events.aspx" aria-label="View upcoming events">View Events</a>
             </div>
           </div>
          
@@ -41,13 +41,13 @@
         <svg class="about-curve-bg" viewBox="0 0 1440 300" preserveAspectRatio="none">
           <defs>
             <linearGradient id="curveBgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style="stop-color:#F1BF63;stop-opacity:0.25" />
-              <stop offset="50%" style="stop-color:#6366f1;stop-opacity:0.15" />
-              <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0.05" />
+              <stop offset="0%" style="stop-color:#FFC85B;stop-opacity:0.35" />
+              <stop offset="50%" style="stop-color:#F7D07A;stop-opacity:0.18" />
+              <stop offset="100%" style="stop-color:#FFDFA7;stop-opacity:0.06" />
             </linearGradient>
           </defs>
           <path d="M0,80 Q360,20 720,80 T1440,80 L1440,0 L0,0 Z" fill="url(#curveBgGradient)"></path>
-          <path d="M0,120 Q360,60 720,120 T1440,120 L1440,80 Q720,20 0,80 Z" fill="rgba(241, 191, 99, 0.08)"></path>
+          <path d="M0,120 Q360,60 720,120 T1440,120 L1440,80 Q720,20 0,80 Z" fill="rgba(255, 200, 91, 0.12)"></path>
         </svg>
 
         <div class="container section-heading reveal">
