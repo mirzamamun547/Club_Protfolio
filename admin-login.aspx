@@ -22,11 +22,11 @@
             <asp:Label ID="lblMessage" runat="server" CssClass="message-label" ForeColor="#5CE1E6" Font-Bold="true" Style="display:block; margin-bottom:10px;" />
             <label>
               <span>Email address</span>
-              <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="admin@kbcofficial.com" required="required" />
+              <asp:TextBox ID="txtEmail" runat="server" TextMode="Email" placeholder="admin@kbcofficial.com" required="required" autocomplete="username" />
             </label>
             <label>
               <span>Password</span>
-              <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="••••••••" required="required" />
+              <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" placeholder="••••••••" required="required" autocomplete="current-password" />
             </label>
             <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn-primary" OnClick="btnLogin_Click" />
             <p class="auth-note">Need support? <a href="mailto:info@kbcofficial.com">info@kbcofficial.com</a></p>

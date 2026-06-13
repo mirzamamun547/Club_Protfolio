@@ -60,7 +60,7 @@ namespace KBC
                             // 2. Cookie Management: Create a cookie indicating last login time
                             HttpCookie loginCookie = new HttpCookie("LastAdminLogin");
                             loginCookie.Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            loginCookie.Expires = DateTime.Now.AddDays(7); // Persist for 7 days
+                            loginCookie.Expires = DateTime.Now.AddDays(9); // Persist for 7 days
                             Response.Cookies.Add(loginCookie);
 
                             // Redirect to dashboard
