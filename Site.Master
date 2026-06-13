@@ -110,6 +110,7 @@
           <a href="index.aspx#about">About</a>
           <a href="member.aspx">Members</a>
           <a href="advisor.aspx">Advisors</a>
+          <a href="sponsors.aspx">Sponsors</a>
           <a href="events.aspx">Events</a>
           <a href="index.aspx#vision">Vision</a>
           <a href="admin-login.aspx" class="nav-cta">Admin</a>
@@ -139,6 +140,7 @@
               <li style="margin-bottom: 8px;"><a href="events.aspx" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;">Events</a></li>
               <li style="margin-bottom: 8px;"><a href="member.aspx" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;">Members</a></li>
               <li style="margin-bottom: 8px;"><a href="advisor.aspx" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;">Advisors</a></li>
+              <li style="margin-bottom: 8px;"><a href="sponsors.aspx" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;">Sponsors</a></li>
               <li><a href="admin-login.aspx" style="color: #94a3b8; text-decoration: none; transition: color 0.3s;">Admin Panel</a></li>
             </ul>
           </div>

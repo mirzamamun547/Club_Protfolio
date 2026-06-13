@@ -24,6 +24,7 @@
           <a href="#events" class="nav-link">Manage Events</a>
           <a href="#members" class="nav-link">Manage Members</a>
           <a href="#advisors" class="nav-link">Manage Advisors</a>
+          <a href="#sponsors" class="nav-link">Manage Sponsors</a>
           <a href="#programs" class="nav-link">Manage Programs</a>
           <asp:LinkButton ID="lnkLogout" runat="server" CssClass="nav-link logout" OnClick="lnkLogout_Click">Logout</asp:LinkButton>
         </nav>
@@ -58,6 +59,10 @@
             <article class="metric-card">
               <h3><asp:Label ID="lblAdvisorCount" runat="server" Text="0" /></h3>
               <p>Advisors</p>
+            </article>
+            <article class="metric-card">
+              <h3><asp:Label ID="lblSponsorCount" runat="server" Text="0" /></h3>
+              <p>Sponsors</p>
             </article>
           </div>
         </section>
@@ -134,6 +139,29 @@
                 <asp:BoundField DataField="Expertise" HeaderText="Expertise" />
                 <asp:BoundField DataField="Department" HeaderText="Department" />
                 <asp:BoundField DataField="Email" HeaderText="Email" />
+                <asp:TemplateField HeaderText="Action">
+                  <ItemTemplate>
+                    <span class="action-text" style="color:var(--muted); font-size:0.95rem;">System Locked</span>
+                  </ItemTemplate>
+                </asp:TemplateField>
+              </Columns>
+            </asp:GridView>
+          </div>
+        </section>
+
+        <section id="sponsors" class="dashboard-section">
+          <div class="section-heading">
+            <div>
+              <h3>Manage Sponsors</h3>
+              <p>Edit sponsor information and add new sponsors.</p>
+            </div>
+            <a href="addsponsor.aspx" class="btn-primary">+ Add Sponsor</a>
+          </div>
+          <div class="table-wrap">
+            <asp:GridView ID="gvSponsors" runat="server" AutoGenerateColumns="False" GridLines="None" Width="100%">
+              <Columns>
+                <asp:BoundField DataField="Name" HeaderText="Name" />
+                <asp:BoundField DataField="Description" HeaderText="Description" />
                 <asp:TemplateField HeaderText="Action">
                   <ItemTemplate>
                     <span class="action-text" style="color:var(--muted); font-size:0.95rem;">System Locked</span>

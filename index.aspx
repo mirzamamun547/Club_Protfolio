@@ -51,7 +51,7 @@
         </svg>
 
         <div class="container section-heading reveal">
-          <p class="eyebrow">About KBC</p>
+          <p class="eyebrow">About KBEC</p>
           <h2>Helping KUETians choose the right career path</h2>
           <p>KBEC, the premier business and entrepreneurship club of Khulna University of Engineering & Technology, bridges engineering excellence with entrepreneurial vision. Through KBEC Nexus, Entrepreneurial Voice, Case Crack, workshops, seminars, startup programs, and TEDxKUET, it empowers students from idea to launch, fostering leadership, innovation, and real-world impact.</p>
         </div>
