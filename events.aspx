@@ -35,7 +35,7 @@
                 <%# (Eval("SeatsLeft") == DBNull.Value) ? "" : " | <strong>Seats Left:</strong> " + Eval("SeatsLeft") %>
               </div>
               <a href='<%# Eval("FacebookUrl") %>' target="_blank" class="btn-secondary event-btn">View Event Details</a>
-              <a href='<%# "register.aspx?eid=" + Eval("Id") %>' class="btn-primary event-btn">Register</a>
+              <a href='<%# "register.aspx?eid=" + Eval("Id") %>' class='<%# GetRegisterButtonClass(Eval("EventDate"), Eval("SeatsLeft")) %>' style='<%# GetRegisterButtonStyle(Eval("EventDate"), Eval("SeatsLeft")) %>'><%# GetRegisterButtonText(Eval("EventDate"), Eval("SeatsLeft")) %></a>
             </div>
           </article>
         </ItemTemplate>

@@ -208,7 +208,7 @@
         <div class="form-row">
           <div class="form-group">
             <label>Phone Number <span class="required">*</span></label>
-            <asp:TextBox ID="txtPhone" runat="server" TextMode="Phone" placeholder="+1 (555) 000-0000" />
+            <asp:TextBox ID="txtPhone" runat="server" TextMode="Phone" placeholder="+880 134 567 8901" />
           </div>
         </div>
 
@@ -235,7 +235,7 @@
       </asp:Panel>
     </div>
 
-    <a href="events.aspx" class="back-link">← Back to Events</a>
+    <a href="events.aspx" class="back-link"><b> Back to Events</b></a>
   </div>
 </asp:Content>
 

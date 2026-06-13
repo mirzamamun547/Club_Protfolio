@@ -44,8 +44,15 @@ WHERE e.Id = @id", conn))
                             // store event id in hidden field for postback
                             hfEventId.Value = id.ToString();
                             DateTime d;
+                            bool eventEnded = false;
                             if (DateTime.TryParse(rdr["EventDate"].ToString(), out d))
+                            {
                                 lblEventDate.Text = d.ToString("MMM d, yyyy");
+                                if (d.Date < DateTime.Today)
+                                {
+                                    eventEnded = true;
+                                }
+                            }
                             lblLocation.Text = rdr["Location"].ToString();
                             object maxObj = rdr["MaxSeats"];
                             object regCountObj = rdr["RegisteredCount"];
@@ -55,12 +62,20 @@ WHERE e.Id = @id", conn))
                             {
                                 int seatsLeft = Math.Max(0, maxSeats.Value - regCount);
                                 lblSeatsInfo.Text = string.Format("Registered: {0} | Seats left: {1}", regCount, seatsLeft);
-                                if (seatsLeft <= 0)
+                                if (seatsLeft <= 0 || eventEnded)
+                                {
                                     btnRegister.Enabled = false;
+                                    if (eventEnded) btnRegister.Text = "Event Ended";
+                                }
                             }
                             else
                             {
                                 lblSeatsInfo.Text = string.Format("Registered: {0} | Seats left: Unlimited", regCount);
+                                if (eventEnded)
+                                {
+                                    btnRegister.Enabled = false;
+                                    btnRegister.Text = "Event Ended";
+                                }
                             }
                         }
                     else
@@ -110,18 +125,30 @@ WHERE e.Id = @id", conn))
                             // Check current registrations count and MaxSeats with locking to avoid race conditions
                             int regCount = 0;
                             int? maxSeats = null;
+                            DateTime? eventDate = null;
                             using (SqlCommand chkCmd = new SqlCommand(@"SELECT @regCount = COUNT(*) FROM EventRegistrations WITH (UPDLOCK, HOLDLOCK) WHERE EventId = @EventId;
-                                SELECT @maxSeats = MaxSeats FROM Events WHERE Id = @EventId;", conn, tran))
+                                SELECT @maxSeats = MaxSeats, @eventDate = EventDate FROM Events WHERE Id = @EventId;", conn, tran))
                             {
                                 chkCmd.Parameters.AddWithValue("@EventId", eventId);
                                 var pReg = new SqlParameter("@regCount", System.Data.SqlDbType.Int) { Direction = System.Data.ParameterDirection.Output };
                                 var pMax = new SqlParameter("@maxSeats", System.Data.SqlDbType.Int) { Direction = System.Data.ParameterDirection.Output, IsNullable = true };
+                                var pDate = new SqlParameter("@eventDate", System.Data.SqlDbType.DateTime) { Direction = System.Data.ParameterDirection.Output, IsNullable = true };
                                 chkCmd.Parameters.Add(pReg);
                                 chkCmd.Parameters.Add(pMax);
+                                chkCmd.Parameters.Add(pDate);
                                 chkCmd.ExecuteNonQuery();
                                 regCount = (int)(chkCmd.Parameters["@regCount"].Value ?? 0);
                                 object maxObj = chkCmd.Parameters["@maxSeats"].Value;
                                 if (maxObj != DBNull.Value) maxSeats = Convert.ToInt32(maxObj);
+                                object dateObj = chkCmd.Parameters["@eventDate"].Value;
+                                if (dateObj != DBNull.Value) eventDate = Convert.ToDateTime(dateObj);
+                            }
+
+                            if (eventDate.HasValue && eventDate.Value.Date < DateTime.Today)
+                            {
+                                tran.Rollback();
+                                DisplayMessage("Registration closed: event has already ended.", "error");
+                                return;
                             }
 
                             if (maxSeats.HasValue && regCount >= maxSeats.Value)

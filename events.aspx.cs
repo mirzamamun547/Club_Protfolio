@@ -39,5 +39,50 @@ ORDER BY e.EventDate DESC", conn))
                 // Handle exception
             }
         }
+
+        protected string GetRegisterButtonClass(object eventDateObj, object seatsLeftObj)
+        {
+            DateTime eventDate;
+            string dateStr = eventDateObj != null ? eventDateObj.ToString() : null;
+            if (DateTime.TryParse(dateStr, out eventDate) && eventDate.Date < DateTime.Today)
+            {
+                return "btn-secondary event-btn disabled";
+            }
+            if (seatsLeftObj != DBNull.Value && seatsLeftObj != null && Convert.ToInt32(seatsLeftObj) <= 0)
+            {
+                return "btn-secondary event-btn disabled";
+            }
+            return "btn-primary event-btn";
+        }
+
+        protected string GetRegisterButtonStyle(object eventDateObj, object seatsLeftObj)
+        {
+            DateTime eventDate;
+            string dateStr = eventDateObj != null ? eventDateObj.ToString() : null;
+            if (DateTime.TryParse(dateStr, out eventDate) && eventDate.Date < DateTime.Today)
+            {
+                return "pointer-events: none; opacity: 0.6;";
+            }
+            if (seatsLeftObj != DBNull.Value && seatsLeftObj != null && Convert.ToInt32(seatsLeftObj) <= 0)
+            {
+                return "pointer-events: none; opacity: 0.6;";
+            }
+            return "";
+        }
+
+        protected string GetRegisterButtonText(object eventDateObj, object seatsLeftObj)
+        {
+            DateTime eventDate;
+            string dateStr = eventDateObj != null ? eventDateObj.ToString() : null;
+            if (DateTime.TryParse(dateStr, out eventDate) && eventDate.Date < DateTime.Today)
+            {
+                return "Registration Closed";
+            }
+            if (seatsLeftObj != DBNull.Value && seatsLeftObj != null && Convert.ToInt32(seatsLeftObj) <= 0)
+            {
+                return "Event Full";
+            }
+            return "Register";
+        }
     }
 }
