@@ -90,7 +90,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Action">
                   <ItemTemplate>
-                    <span class="action-text" style="color:var(--muted); font-size:0.95rem;">System Locked</span>
+                    <a href='<%# "event-registrations.aspx?eid=" + Eval("Id") %>' class="action-link" style="color:var(--primary); font-size:0.95rem; text-decoration:none; font-weight:600;">View Registrations</a>
                   </ItemTemplate>
                 </asp:TemplateField>
               </Columns>

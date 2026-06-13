@@ -64,7 +64,7 @@ namespace KBC
                     lblSponsorCount.Text = cmdCount.ExecuteScalar().ToString();
 
                     // Load events grid
-                    using (SqlDataAdapter da = new SqlDataAdapter("SELECT EventName, EventDate, Location, Status FROM Events ORDER BY EventDate DESC", conn))
+                    using (SqlDataAdapter da = new SqlDataAdapter("SELECT Id, EventName, EventDate, Location, Status FROM Events ORDER BY EventDate DESC", conn))
                     {
                         DataTable dt = new DataTable();
                         da.Fill(dt);
